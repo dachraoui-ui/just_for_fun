@@ -8,12 +8,12 @@ public class FormImpl implements FormsInterface {
     private RectangleInterface rectangleInterface;
     private SquareInterface squareInterface;
 
-    public FormImpl(){
-        this.rectangleInterface = new RectangleImpl();
-        this.squareInterface = new SquareImpl();
+    public FormImpl(RectangleInterface rectangleInterface,SquareInterface squareInterface){
+        this.rectangleInterface = rectangleInterface;
+        this.squareInterface = squareInterface;
     }
     @Override
     public String print(){
-        return " "+rectangleInterface.print()+squareInterface.print();
+        return " "+rectangleInterface.print()+"  "+squareInterface.print();
     }
 }
