@@ -1,5 +1,7 @@
 package org.newapp.just_for_fun.dao;
 
-public interface BookDao {
+import org.newapp.just_for_fun.domain.Book;
 
+public interface BookDao {
+    void create(Book book);
 }
