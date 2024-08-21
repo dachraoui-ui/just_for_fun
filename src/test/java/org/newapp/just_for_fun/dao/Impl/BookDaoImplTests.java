@@ -1,7 +1,8 @@
-package org.newapp.just_for_fun.dao;
+package org.newapp.just_for_fun.dao.Impl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -32,5 +33,13 @@ public class BookDaoImplTests{
         verify(jdbcTemplate).update(eq("INSERT INTO books (isbn,title,author_id) VALUES (?,?,?)"),
                 eq("9780062315007"),eq("The Alchemist"),eq(1L));
 
+    }
+    @Test
+    public void testThatFindOneBookGeneratesCorrectSql(){
+
+            underTest.find("9780062315007");
+            verify(jdbcTemplate).query(eq("SELECT isbn , title , author_id from books where isbn = ? limit 1"),
+                    ArgumentMatchers.<BookDaoImpl.BookMapper>any(),
+                    eq("9780062315007"));
     }
 }
