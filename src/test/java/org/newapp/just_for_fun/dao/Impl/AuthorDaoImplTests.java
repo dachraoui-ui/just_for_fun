@@ -6,12 +6,11 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.newapp.just_for_fun.TestDataUtil;
 import org.newapp.just_for_fun.dao.impl.AuthorDaoImpl;
 import org.newapp.just_for_fun.domain.Author;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
@@ -25,17 +24,14 @@ public class AuthorDaoImplTests {
 
     @Test
     public void testThatCreateAuthorGeneratesCorrectSQL() {
-        Author author = Author.builder()
-                .id(1L)
-                .name("ahmed")
-                .age(40)
-                .build();
+        Author author = TestDataUtil.createTestAuthor();
 
         underTest.create(author);
 
         verify(jdbcTemplate).update(eq("INSERT INTO authors (id,name,age) VALUES (?,?,?)"),
                 eq(1L),eq("ahmed"),eq(40));
     }
+
     @Test
     public void testThatFindOneAuthorGenerateCorrectSQL(){
 
